@@ -54,7 +54,6 @@ impl AddressData {
         }
     }
 
-
     pub fn from_discrimination_and_kind_type(
         discrimination: Discrimination,
         kind: &KindType,
@@ -122,6 +121,14 @@ impl AddressData {
         }
     }
 
+    pub fn delegation_key(&self) -> PublicKey<Ed25519> {
+        match self.kind() {
+            Kind::Group(_, delegation_key) => delegation_key,
+            Kind::Account(public_key) => public_key,
+            _ => panic!("wrong kind of address to to get delegation key"),
+        }
+    }
+
     pub fn private_key(&self) -> EitherEd25519SecretKey {
         self.private_key.clone()
     }
@@ -132,13 +139,6 @@ impl AddressData {
 
     pub fn discrimination(&self) -> Discrimination {
         self.address.discrimination().clone()
-    }
-
-    pub fn delegation_key(&self) -> PublicKey<Ed25519> {
-        match self.kind() {
-            Kind::Group(_, delegation_key) => delegation_key,
-            _ => panic!("cannot get delegation key from non group addres kind"),
-        }
     }
 
     pub fn to_bech32_str(&self) -> String {
