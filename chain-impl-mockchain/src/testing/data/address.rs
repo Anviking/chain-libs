@@ -7,8 +7,7 @@ use crate::{
 };
 use chain_addr::{Address, AddressReadable, Discrimination, Kind, KindType};
 use chain_crypto::{
-    testing::TestCryptoGen, AsymmetricKey, Ed25519, Ed25519Extended, KeyPair,
-    PublicKey,
+    testing::TestCryptoGen, AsymmetricKey, Ed25519, Ed25519Extended, KeyPair, PublicKey,
 };
 
 use crate::quickcheck::RngCore;
